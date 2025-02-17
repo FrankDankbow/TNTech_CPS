@@ -1,5 +1,15 @@
 # TNTech_CPS
 
+## Assumption
+
+This assumes that Virtualbox is installed and the extension pack has been installed with your computer rebooted as well.
+
+## What is this for?
+
+This Vagrantfile sets up the entire virtual side of the Cyber Physical Security labs. It stands up plc, hmi, and kali VMs with OpenPLC and ScadaBR installed as well.
+
+This Vagrantfile also takes care of creating a private NAT Network and portforwarding from the PLC and HMI to localhost as well!
+
 ## Vagrant
 
 Install Vagrant for your operating system here: https://developer.hashicorp.com/vagrant/downloads
@@ -16,7 +26,9 @@ Navigate to CPS_Lab (ex. cd CPS_Lab)
 
 In Powershell, Bash, or ZSH... run ```vagrant init``` once in the CPS_Lab folder.
 
-Once that finishes, run ```vagrant up``` and wait for a few minutes. This will stand up the entire lab. If asked about allow Virtualbox to manage networks, select Allow.
+Once that finishes, run ```vagrant up``` and wait for a few minutes (it might take a while). This will stand up the entire lab. If asked about allowing Virtualbox to manage networks, select Allow.
+
+**Important:** You will need to be in the CPS_Lab folder for any of these Vagrant commands to control the CPS environment, including to ssh to a machine.
 
 ## Using the environment
 
