@@ -1,0 +1,79 @@
+# Vagrantfile for the cyber physical lab. 
+# Modified by: Travis Lee
+# Modified date: 02/17/2025
+
+## Purpose: to automate the process for creation of the cyber physical lab. This file will create the PLC, HMI, and Kali VMs with one command. 
+# this file takes a minute to run. It has to pull VMs, and then run installers for OpenPLC and ScadaBR.
+
+Vagrant.configure("2") do |config|
+  config.vm.define "plc" do |plc|
+    plc.vm.box = "generic/ubuntu2204"
+    plc.vm.box_version = "4.3.12"
+    plc.vm.provider "virtualbox" do |plc_vb|
+      plc_vb.gui = false
+      plc_vb.name = "plc"
+      plc_vb.memory = 1024
+      plc_vb.cpus = 2
+    end
+    plc.vm.hostname = "plc"
+    plc.vm.network "private_network", ip: "192.168.50.4"
+    plc.vm.network "forwarded_port", guest: 8080, host: 8000, host_ip: "127.0.0.1", guest_ip: "192.168.50.4"
+    plc.vm.provision "shell", inline: <<-SHELL
+      echo -e "toor\ntoor" | passwd -q
+      apt-get update
+      apt-get install git vim -y
+      git clone https://github.com/thiagoralves/OpenPLC_v3.git
+      cd OpenPLC_v3
+      bash install.sh linux
+      reboot
+    SHELL
+        
+  end
+
+  config.vm.define "hmi" do |hmi|
+    hmi.vm.box = "generic/ubuntu2204"
+    hmi.vm.box_version = "4.3.12"
+    hmi.vm.provider "virtualbox" do |hmi_vb|
+      hmi_vb.gui = false
+      hmi_vb.name = "hmi"
+      hmi_vb.memory = 1024
+      hmi_vb.cpus = 2
+    end
+    hmi.vm.hostname = "hmi"
+    hmi.vm.network "private_network", ip: "192.168.50.5"
+    hmi.vm.network "forwarded_port", guest: 9090, host: 9000, host_ip: "127.0.0.1", guest_ip: "192.168.50.5"
+    hmi.vm.provision "file", source: "./tomcat.sh", destination: "/home/vagrant/tomcat.sh"
+    hmi.vm.provision "shell", inline: <<-SHELL
+      echo -e "toor\ntoor" | passwd -q
+      apt-get update
+      apt-get install git vim -y
+      git clone https://github.com/thiagoralves/ScadaBR_Installer.git
+      cd ScadaBR_Installer
+      bash install_scadabr.sh
+      cd ../
+      bash tomcat.sh
+      systemctl enable tomcat.service
+      reboot
+    SHELL
+  end
+
+  config.vm.define "kali" do |kali|
+    kali.vm.box = "kalilinux/rolling"
+    config.vm.box_version = "2024.4"
+    kali.vm.provider "virtualbox" do |kali_vb|
+      # To preserve resources, set gui to false and change memory to 1024.
+      kali_vb.gui = true
+      kali_vb.name = "kali"
+      kali_vb.memory = 2048
+      kali_vb.cpus = 2
+    end
+    kali.vm.hostname = "kali"
+    kali.vm.network "private_network", ip: "192.168.50.6"
+    kali.vm.provision "shell", inline: <<-SHELL
+      echo -e "toor/ntoor" | passwd -q
+      apt-get update
+      # use this to install more tools!
+      apt-get install git vim -y
+    SHELL
+  end
+end
