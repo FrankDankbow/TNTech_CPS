@@ -7,8 +7,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.define "plc" do |plc|
-    plc.vm.box = "generic/ubuntu2204"
-    plc.vm.box_version = "4.3.12"
+    plc.vm.box = "net9/ubuntu-24.04-arm64"
     plc.vm.provider "virtualbox" do |plc_vb|
       plc_vb.gui = false
       plc_vb.name = "plc"
@@ -31,8 +30,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "hmi" do |hmi|
-    hmi.vm.box = "generic/ubuntu2204"
-    hmi.vm.box_version = "4.3.12"
+    hmi.vm.box = "net9/ubuntu-24.04-arm64"
     hmi.vm.provider "virtualbox" do |hmi_vb|
       hmi_vb.gui = false
       hmi_vb.name = "hmi"
@@ -41,8 +39,7 @@ Vagrant.configure("2") do |config|
     end
     hmi.vm.hostname = "hmi"
     hmi.vm.network "private_network", ip: "192.168.50.5"
-    hmi.vm.network "forwarded_port", guest: 9090, host: 9000, host_ip: "127.0.0.1", guest_ip: "192.168.50.5"
-    hmi.vm.provision "file", source: "./tomcat.sh", destination: "/home/vagrant/tomcat.sh"
+    hmi.vm.network "forwarded_port", guest: 8080, host: 9000, host_ip: "127.0.0.1", guest_ip: "192.168.50.5"
     hmi.vm.provision "shell", inline: <<-SHELL
       echo -e "toor\ntoor" | passwd -q
       apt-get update
@@ -53,12 +50,12 @@ Vagrant.configure("2") do |config|
       reboot
     SHELL
   end
+
 # comment the =begin and =end to enable kali deployment
 # the =begin and =end is a block comment
-=begin
+=begin 
   config.vm.define "kali" do |kali|
-    kali.vm.box = "kalilinux/rolling"
-    config.vm.box_version = "2024.4"
+    kali.vm.box = "net9/ubuntu-24.04-arm64"
     kali.vm.provider "virtualbox" do |kali_vb|
       # To preserve resources, set gui to false and change memory to 1024.
       kali_vb.gui = true
