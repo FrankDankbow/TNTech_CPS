@@ -14,6 +14,8 @@ This Vagrantfile also takes care of creating a private NAT Network and portforwa
 
 Install Vagrant for your operating system here: https://developer.hashicorp.com/vagrant/downloads
 
+What is Vagrant and how to use it? https://www.youtube.com/watch?v=sr9pUpSAexE&t=168s
+
 ### Vagrant Commands
 
 https://developer.hashicorp.com/vagrant/docs/cli
