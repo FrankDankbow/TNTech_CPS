@@ -4,6 +4,10 @@
 
 This assumes that Virtualbox is installed and the extension pack has been installed with your computer rebooted as well.
 
+This assumes that you are running an AMD64 machine and not ARM64. ARM64 examples are M-series Macbooks. 
+
+Work is being done to support ARM64. Please check back later.
+
 ## What is this for?
 
 This Vagrantfile sets up the entire virtual side of the Cyber Physical Security labs. It stands up plc, hmi, and kali VMs with OpenPLC and ScadaBR installed as well.
