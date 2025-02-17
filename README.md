@@ -4,9 +4,13 @@
 
 This assumes that Virtualbox is installed and the extension pack has been installed with your computer rebooted as well.
 
-This assumes that you are running an AMD64 machine and not ARM64. ARM64 examples are M-series Macbooks. 
+## AMD64 Machines (Most Machines)
 
-Work is being done to support ARM64. Please check back later.
+Use the CPS_Lab folder when running Vagrant.
+
+## ARM64 Machines (M-Series Macbooks)
+
+Use the CPS_Lab_arm64 folder when running Vagrant.
 
 ## What is this for?
 
@@ -24,7 +28,7 @@ What is Vagrant and how to use it? https://www.youtube.com/watch?v=sr9pUpSAexE&t
 
 https://developer.hashicorp.com/vagrant/docs/cli
 
-## How to use this repo
+## Deploying the VM Lab
 
 Clone/Download repo to local file system.
 
@@ -46,9 +50,6 @@ Once built, you can access the environment from Virtualbox, or by typing ```vagr
 
 ```vagrant ssh kali```
 
-### Usernames an passwords
-
-Each box built with vagrant will have a user names vagrant. I have changed the passwords to 'toor' in case you need it. 
 
 ## Stopping and Destroying
 
@@ -61,6 +62,10 @@ All of the vagrant commands must be ran from the folder with your Vagrantfile in
 
 ## Environment Information
 
+### Usernames an passwords
+
+Each box built with vagrant will have a user names vagrant. I have changed the passwords to 'toor' in case you need it. 
+
 ### IP Addresses
 
 PLC: 192.168.50.4
@@ -68,3 +73,14 @@ PLC: 192.168.50.4
 HMI: 192.168.50.5
 
 Kali: 192.168.50.6
+
+## Known Issues/Bugs
+
+I will be updating this section as I find/hear about bugs students have.
+
+
+#### Mostly Windows Issue
+
+If you run ```vagrant destroy``` and then ```vagrant up``` and get an error along the lines of "Cannot rename folder_XX to folder_YY" then find where Virtualbox stores your VM folders (should be under user home folder) and delete the folders for plc, hmi, and kali. 
+
+After doing so, you can rerun ```vagrant up```.
