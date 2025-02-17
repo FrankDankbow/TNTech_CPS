@@ -74,6 +74,10 @@ HMI: 192.168.50.5
 
 Kali: 192.168.50.6
 
+### Kali
+
+The Kali VM is actually just Ubuntu with metasploit installed. By default this VM is headless (no GUI). This can be modified by changing gui = False to True. You can stop the 'Kali' VM from building by uncommenting out the section at the bottom of the Vagrantfile.
+
 ## Known Issues/Bugs
 
 I will be updating this section as I find/hear about bugs students have.
