@@ -1,6 +1,6 @@
 # TNTech_CPS
 
-## Assumption
+## Assumptions
 
 This assumes that Virtualbox is installed and the extension pack has been installed with your computer rebooted as well.
 
@@ -57,3 +57,14 @@ To simple stop the environment at once, run ```vagrant halt```. The environment 
 To completely destroy the environment, run ```vagrant destroy```.
 
 All of the vagrant commands must be ran from the folder with your Vagrantfile in it.
+
+
+## Environment Information
+
+### IP Addresses
+
+PLC: 192.168.50.4
+
+HMI: 192.168.50.5
+
+Kali: 192.168.50.6
