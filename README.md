@@ -63,6 +63,8 @@ To completely destroy the environment, run ```vagrant destroy```.
 
 All of the vagrant commands must be ran from the folder with your Vagrantfile in it.
 
+<img src="./assets/cps_destroy.gif" width="80%" height="80%"/>
+
 
 ## Environment Information
 
