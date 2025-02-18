@@ -40,6 +40,8 @@ Once that finishes, run ```vagrant up``` and wait for a few minutes (it might ta
 
 **Important:** You will need to be in the CPS_Lab folder for any of these Vagrant commands to control the CPS environment, including to ssh to a machine.
 
+<img src="./assets/cps_rec.gif" width="50%" height="50%"/>
+
 ## Using the environment
 
 Once built, you can access the environment from Virtualbox, or by typing ```vagrant ssh``` followed by which machine. Example for each one.
@@ -49,6 +51,8 @@ Once built, you can access the environment from Virtualbox, or by typing ```vagr
 ```vagrant ssh hmi```
 
 ```vagrant ssh kali```
+
+<img src="./assets/cps_access.gif" width="50%" height="50%"/>
 
 
 ## Stopping and Destroying
