@@ -34,7 +34,7 @@ Clone/Download repo to local file system.
 
 Navigate to CPS_Lab (ex. cd CPS_Lab)
 
-In Powershell, Bash, or ZSH... run ```vagrant init``` once in the CPS_Lab folder.
+In Powershell, Bash, or Zsh... run ```vagrant init``` once in the CPS_Lab folder.
 
 Once that finishes, run ```vagrant up``` and wait for a few minutes (it might take a while). This will stand up the entire lab. If asked about allowing Virtualbox to manage networks, select Allow.
 
