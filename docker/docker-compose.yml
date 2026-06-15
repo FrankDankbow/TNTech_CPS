@@ -1,16 +1,27 @@
 version: "3.9"
+
 services:
-  openplc-runtime:
-    image: ghcr.io/autonomy-logic/openplc-runtime:latest
-    container_name: openplc-runtime
+  plc:
+    image: ubuntu:22.04
+    container_name: plc
+    hostname: plc
+    stdin_open: true
+    tty: true
     networks:
       cyberlab_net:
         ipv4_address: 192.168.50.4
     ports:
-      - "8443:8443"
-    volumes:
-      - openplc-runtime-data:/var/run/runtime
-    restart: unless-stopped
+      - "8000:8080"
+    command: >
+      bash -c "
+        apt-get update &&
+        DEBIAN_FRONTEND=noninteractive apt-get install -y git vim bash-completion &&
+        git clone https://github.com/FrankDankbow/OpenPLC_v3.git &&
+        cd OpenPLC_v3 &&
+        bash install.sh linux &&
+        tail -f /dev/null
+      "
+
 
 
 
