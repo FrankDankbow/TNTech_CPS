@@ -1,0 +1,64 @@
+version: "3.9"
+services:
+  openplc-runtime:
+    image: ghcr.io/autonomy-logic/openplc-runtime:latest
+    container_name: openplc-runtime
+    networks:
+      cyberlab_net:
+        ipv4_address: 192.168.50.4
+    ports:
+      - "8443:8443"
+    volumes:
+      - openplc-runtime-data:/var/run/runtime
+    restart: unless-stopped
+
+
+
+  hmi:
+    image: ubuntu:22.04
+    container_name: hmi
+    hostname: hmi
+    stdin_open: true
+    tty: true
+    networks:
+      cyberlab_net:
+        ipv4_address: 192.168.50.5
+    ports:
+      - "9000:8080"
+    command: >
+      bash -c "
+        apt-get update &&
+        DEBIAN_FRONTEND=noninteractive apt-get install -y git vim bash-completion &&
+        git clone https://github.com/FrankDankbow/ScadaBR_Installer.git &&
+        cd ScadaBR_Installer &&
+        bash install_scadabr.sh &&
+        tail -f /dev/null
+      "
+
+  kali:
+    image: ubuntu:22.04
+    container_name: kali
+    hostname: kali
+    stdin_open: true
+    tty: true
+    networks:
+      cyberlab_net:
+        ipv4_address: 192.168.50.6
+    command: >
+      bash -c "
+        apt-get update &&
+        DEBIAN_FRONTEND=noninteractive apt-get install -y git vim bash-completion snapd &&
+        snap install metasploit-framework --classic &&
+        tail -f /dev/null
+      "
+
+networks:
+  cyberlab_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.50.0/24
+
+volumes:
+  openplc-runtime-data:
+
